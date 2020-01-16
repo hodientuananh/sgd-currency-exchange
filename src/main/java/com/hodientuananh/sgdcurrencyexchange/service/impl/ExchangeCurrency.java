@@ -17,17 +17,17 @@ import java.util.Iterator;
 public class ExchangeCurrency implements TradingCurrency {
 
     @Override
-    public BigDecimal getExchangedRate(Currency targetCurrency) {
+    public BigDecimal getExchangedRate(String targetCurrency) {
         try {
             log.info(Constants.LOG_BEGIN_SERVICE + "getExchangedRate");
 
             for (Iterator<Currency> it = ExchangeRate.rates.iterator(); it.hasNext(); ) {
                 Currency currency = it.next();
-                if (currency.getName().equalsIgnoreCase(targetCurrency.getName()))
+                if (currency.getName().equalsIgnoreCase(targetCurrency))
                     return currency.getExchangedRate();
             }
 
-            throw new SgdExceptionService("TARGET_CURRENCY_NOT_FOUND", new Object[]{targetCurrency.getName()});
+            throw new SgdExceptionService("TARGET_CURRENCY_NOT_FOUND", new Object[]{targetCurrency});
         } finally {
             log.info(Constants.LOG_END_SERVICE + "getExchangedRate");
         }
@@ -35,7 +35,7 @@ public class ExchangeCurrency implements TradingCurrency {
     }
 
     @Override
-    public BigDecimal getExchangedAmount(Currency targetCurrency, BigDecimal sourceAmount) {
+    public BigDecimal getExchangedAmount(String targetCurrency, BigDecimal sourceAmount) {
          try {
             log.info(Constants.LOG_BEGIN_SERVICE + "getExchangedAmount");
 

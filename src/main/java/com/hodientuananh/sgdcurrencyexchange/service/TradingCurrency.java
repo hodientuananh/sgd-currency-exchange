@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public interface TradingCurrency {
 
-    public BigDecimal getExchangedRate(Currency targetCurrency);
+    public BigDecimal getExchangedRate(String targetCurrency);
 
-    public BigDecimal getExchangedAmount(Currency targetCurrency, BigDecimal sourceAmount);
+    public BigDecimal getExchangedAmount(String targetCurrency, BigDecimal sourceAmount);
 }

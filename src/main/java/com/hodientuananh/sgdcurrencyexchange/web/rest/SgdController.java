@@ -144,15 +144,15 @@ public class SgdController {
         };
     }
 
-    @GetMapping(path = "{sgdAmount}")
-    public ResponseEntity<ExchangeCurrencyResponse> getExchangeRateAndAmount(@PathVariable String sgdAmount, @RequestBody Currency targetCurrency) {
+    @GetMapping
+    public ResponseEntity<ExchangeCurrencyResponse> getExchangeRateAndAmount(@RequestParam(name = "sgdAmount") String sgdAmount, @RequestParam(name = "targetCurrency") String targetCurrency) {
         try {
             log.info(Constants.LOG_BEGIN_API + "getExchangeRateAndAmount");
 
             ExchangeCurrencyResponse res = new ExchangeCurrencyResponse();
 
             res.setSourceCurrency("SGD");
-            res.setTargetCurrency(targetCurrency.getName());
+            res.setTargetCurrency(targetCurrency);
             res.setExchangeAmount(tradingCurrency.getExchangedAmount(targetCurrency, new BigDecimal(sgdAmount)));
             res.setExchangeRate(tradingCurrency.getExchangedRate(targetCurrency));
             res.setSourceAmount(new BigDecimal(sgdAmount));
